@@ -1,0 +1,31 @@
+<?php
+
+namespace MyApp\Messages\Station;
+
+class MessagesFormat {
+    function __construct() {
+            $this->CancelReservation= '[2,"15455","CancelReservation",{"reservationId":870511417}]';
+            $this->ChangeAvailability = '[2,"15455","ChangeAvailability",{"connectorId":1,"type": "Inoperative"}]';//Operative
+        $this->ChangeConfiguration = '[2,"15455","ChangeConfiguration",{"reservationId":870511417}]';
+            $this->ClearCache = '[2,"15455","ClearCache",{}]';
+        $this->ClearChargingProfile = '[2,"15455","ClearChargingProfile",{"reservationId":870511417}]';
+        $this->DataTransfer = '[2,"15455","DataTransfer",{"reservationId":870511417}]';
+        $this->GetCompositeSchedule = '[2,"15455","GetCompositeSchedule",{"reservationId":870511417}]';
+            $this->GetConfiguration ='[2,"15455","GetConfiguration",{}]';
+            /*
+             * [3,"15455",{"configurationKey":[{"key":"AllowOfflineTxForUnknownId","readonly":false,"value":"false"},{"key":"AuthorizationCacheEnabled","readonly":false,"value":"false"},{"key":"AuthorizeRemoteTxRequests","readonly":false,"value":"true"},{"key":"ClockAlignedDataInterval","readonly":false,"value":"0"},{"key":"ConnectionTimeOut","readonly":false,"value":"60"},{"key":"GetConfigurationMaxKeys","readonly":true,"value":"30"},{"key":"HeartbeatInterval","readonly":false,"value":"7200"},{"key":"LocalAuthorizeOffline","readonly":false,"value":"false"},{"key":"LocalPreAuthorize","readonly":false,"value":"0"},{"key":"MeterValueSampleInterval","readonly":false,"value":"20"},{"key":"NumberOfConnectors","readonly":true,"value":"1"},{"key":"ResetRetries","readonly":false,"value":"0"},{"key":"StopTransactionOnEVSideDisconnect","readonly":false,"value":"1"},{"key":"StopTransactionOnInvalidId","readonly":false,"value":"1"},{"key":"TransactionMessageAttempts","readonly":false,"value":"50"},{"key":"TransactionMessageRetryInterval","readonly":false,"value":"60"},{"key":"WebSocketPingInterval","readonly":false,"value":"60"},{"key":"LocalAuthListEnabled","readonly":false,"value":"false"},{"key":"LocalAuthListMaxLength","readonly":true,"value":"6"},{"key":"SendLocalListMaxLength","readonly":true,"value":"6"},{"key":"ChargeProfileMaxStackLevel","readonly":true,"value":"3"},{"key":"UnlockConnectorOnEVSideDisconnect","readonly":false,"value":"1"},{"key":"SendJCMeterValuesType","readonly":true,"value":"1"},{"key":"ChargingScheduleAllowedChargingRateUnit","readonly":true,"value":"Power"},{"key":"ChargingScheduleMaxPeriods","readonly":true,"value":"3"},{"key":"MaxChargingProfilesInstalled","readonly":true,"value":"1"},{"key":"LocalListVersion","readonly":true,"value":"-1"},{"key":"MeterValuesAlignedData","readonly":false,"value":"Current.Import,Energy.Active.Import.Register,Energy.Active.Import.Interval,Power.Active.Import,Voltage,SoC"},{"key":"MeterValuesSampledData","readonly":false,"value":"Current.Import,Energy.Active.Import.Register,Energy.Active.Import.Interval,Power.Active.Import,Voltage,SoC"},{"key":"StopTxnAlignedData","readonly":false,"value":"SoC"},{"key":"StopTxnSampledData","readonly":false,"value":"Energy.Active.Import.Register"},{"key":"ConnectorPhaseRotation","readonly":false,"value":"RST"},{"key":"SupportedFeatureProfiles","readonly":true,"value":"Core,FirmwareManagement,LocalAuthListManagement,Reservation,SmartCharging,RemoteTrigger"},{"key":"Url","readonly":false,"value":"ws://charge-angels.com/OCPP16/65cfc857b4f3ab4f5ed335fb/6658a25ed8f569a5f5fe9075"},{"key":"Vendor","readonly":true,"value":"JC"},{"key":"Model","readonly":true,"value":"MultiSocketCharger"},{"key":"TimeZone","readonly":false,"value":"8"},{"key":"ProtocolName","readonly":true,"value":"ocpp1.6"},{"key":"QRCodeTextOfConnector-1","readonly":false,"value":"TEST QRCODE1"},{"key":"QRCodeTextOfConnector-2","readonly":false,"value":"TEST QRCODE2"},{"key":"QRCodeTextOfConnector-3","readonly":false,"value":"TEST QRCODE3"},{"key":"AuthorizationKey","readonly":false,"value":""},{"key":"AuthorizationUser","readonly":true,"value":""},{"key":"CpoName","readonly":false,"value":"SJSSERVICES"},{"key":"OutputLimitRate","readonly":false,"value":"100"},{"key":"PeakPrice","readonly":false,"value":"1.0000"},{"key":"OffPeakPrice","readonly":false,"value":"0.5000"},{"key":"IdleFeePerMinute","readonly":false,"value":"0.0100"},{"key":"IdleTime","readonly":false,"value":"5"},{"key":"MacEnabled","readonly":false,"value":"true"},{"key":"FreeChargeMode","readonly":false,"value":"false"},{"key":"KeepConnectOTAServer","readonly":false,"value":"true"},{"key":"ChargePointID","readonly":false,"value":"EXT-CP-002-SA"}]}]
+             */
+            $this->GetDiagnostics = '[2,"15455","GetDiagnostics",{"location":"url to store diagnostic file"}]';
+        $this->DiagnosticsStatusNotification = '[2,"15455","DiagnosticsStatusNotification",{"reservationId":870511417}]';
+            $this->GetLocalListVersion ='[2,"15455","GetLocalListVersion",{}]';
+            $this->RemoteStartTransaction = '[2,"12321321321321","RemoteStartTransaction",{"idTag":"EXT-CP-002-SA","connectorId":1}]';
+            $this->RemoteStopTransaction = '[2,"123213213213211","RemoteStopTransaction",{"transactionId":1}]';
+            $this->ReserveNow = '[2,"15455","ReserveNow",{"connectorId":1,"expiryDate":"2022-11-25T11:33:01.020Z","idTag":"idTag_Charger","reservationId":870511417}]';
+            $this->Reset = '[2," 15455","Reset",{"type":"Hard"}]';
+        $this->SendLocalList = '[2,"15455","SendLocalList",{"reservationId":870511417}]';
+        $this->SetChargingProfile = '[2,"15455","SetChargingProfile",{"reservationId":870511417}]';
+            $this->TriggerMessage = '[2,"15455","TriggerMessage",{"connectorId":1,"requestedMessage":"BootNotification"}]';//BootNotification,DiagnosticsStatusNotification,FirmwareStatusNotification,Heartbeat,MeterValues,StatusNotification
+            $this->UnlockConnector = '[2,"15455","UnlockConnector",{"connectorId":1}]';
+            $this->UpdateFirmware = '[2,"15455","UpdateFirmware",{"location":"url to firmware update","retries":11,"retrieveDate":2024-10-11T11:00:00Z","retryInterval":60}]';
+    }
+}
