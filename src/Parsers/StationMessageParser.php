@@ -36,7 +36,8 @@ class StationMessageParser {
         } elseif ($this->data['action']) {
             $swith_by = $this->data['action'];
         }
-        $this->messageHandler = StationMessageFactory::create($swith_by, $this->data, $this->idTag, $this->db);
+        $factory = new StationMessageFactory();
+        $this->messageHandler = $factory->create($swith_by, $this->data, $this->idTag, $this->db);
     }
     public function parse(): array{
        return $this->messageHandler->parse();
