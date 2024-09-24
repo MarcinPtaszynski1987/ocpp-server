@@ -8,7 +8,7 @@ class AuthorizeStationMessage extends StationMessageHandler{
     public function __construct(private readonly string $idTag = "", MySQL $db)
     {
         if ($idTag !== "") {
-            $sql = "SELECT * FROM ocpp_charges_tags WHERE bakend_tag = '$idTag' LIMIT 1";
+            $sql = "SELECT bakend_tag FROM ocpp_charges_tags WHERE bakend_tag = '$idTag' LIMIT 1";
             $in_db = $db->query($sql);
             if (count($in_db) == 0) {
                 $status = "Invalid";

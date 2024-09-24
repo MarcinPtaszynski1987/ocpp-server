@@ -15,11 +15,10 @@ $loop = React\EventLoop\Loop::get();
 $server = new React\Socket\SocketServer('0.0.0.0:2060', array(),$loop);
 
 $secureServer = new SecureServer($server, $loop, [
-    'local_cert'  => '/etc/letsencrypt/live/admin-watt-testing.wattcharge.io/fullchain.pem',
-    'local_pk' => '/etc/letsencrypt/live/admin-watt-testing.wattcharge.io/privkey.pem',
+    'local_cert'  => getenv("FULL_CHAIN_PEM"),
+    'local_pk' => getenv("PRIV_KEY_PEM"),
     'verify_peer' => false,
 ]);
-
 
 
 $socket = new Desc();
@@ -32,20 +31,13 @@ $ioServer->loop->addPeriodicTimer(5, function () use ($socket)
   foreach($socket->clients as $client)
   {
     $init = new Init();
-    $ToSend = $init->SetCommand($socket->ReturnidTag($client));
-    if(count($ToSend))
+    $send = $init->SetCommand($socket->ReturnidTag($client));
+    if(!is_null($send))
     {
-        $send = $ToSend[0];
-        if ($send['charger_idTag'] === $socket->ReturnidTag($client))
-        {
-          $init->UpUserCommand($send['id']);
+          $init->MarkAsSend($send['id']);
           echo 'CS - user_id - '.$send['id'].' - '.$socket->ReturnidTag($client).' '.date('H:i:s').' '.$send['message'].PHP_EOL.PHP_EOL;
           $client->send($send['message']);
-          $init->up_command($send['message'], $socket->ReturnidTag($client));
-        }
     }
   }
 });
-//When the wss connection is active, start a timer to check and send commands to the station
-
 $ioServer->run();

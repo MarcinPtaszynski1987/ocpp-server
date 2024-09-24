@@ -30,19 +30,24 @@ class Init
   //Ping the my_set_command database and if there is a command, send the command to the charging station, then delete the command and the database
   public function SetCommand($idTag): mixed
   {
-        $sql = "SELECT * FROM ocpp_messages_to_send WHERE charger_idTag = '$idTag' AND status LIKE 'NEW' LIMIT 1 ";
-        return $this->db->query($sql);
+        $sql = "SELECT charger_idTag, id, message FROM ocpp_messages_to_send WHERE charger_idTag = '$idTag' AND status LIKE 'NEW' LIMIT 1 ";
+        $data  = $this->db->query($sql);
+        if(count($data)){
+            return $data[0];
+        }else{
+            return null;
+        }
+
   }
 
-  //Write to the temporary base who launched the command
-  public function UpUserCommand($id =0): void
+  public function MarkAsSend($id =0): void
 	{
         $sql = "UPDATE ocpp_messages_to_send SET status = 'SEND', sended_at = NOW()  WHERE id = $id ";
         $this->db->query($sql);
   }
 
   //Write to the database, the history of commands sent manually
-  public function up_command($data, $idTag): void
+  public function LogMessageInDb($data, $idTag): void
   {
         $sql = "INSERT INTO ocpp_messages (message) VALUES ('$idTag -> $data')";
         $this->db->query($sql);
@@ -51,7 +56,10 @@ class Init
   //Write to the database, the history of commands sent manually
 
   //We receive some data from the station and process it through the switch - we answer
-  public function Status($data, $idTag = ''): array
+    /**
+     * @throws \Exception
+     */
+    public function Status($data, $idTag = ''): array
   {
         $parser = intval($data[0]) == 2 ? new StationMessageParser($data, $idTag, $this->db) : new StationResponseParser($data);
         return $parser->parse();
