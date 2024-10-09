@@ -30,12 +30,7 @@ class StationMessageParser {
      */
     private function setupMessageType(): void
     {
-
-        if (isset($this->data[2])) {
-            $swith_by = $this->data[2];
-        } elseif ($this->data['action']) {
-            $swith_by = $this->data['action'];
-        }
+        $swith_by = $this->data[2] ?? $this->data['action'];
         $factory = new StationMessageFactory();
         $this->messageHandler = $factory->create($swith_by, $this->data, $this->idTag, $this->db);
     }
